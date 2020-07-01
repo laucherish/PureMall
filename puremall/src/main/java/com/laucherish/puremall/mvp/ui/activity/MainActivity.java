@@ -2,19 +2,17 @@ package com.laucherish.puremall.mvp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.laucherish.puremall.R;
 import com.laucherish.puremall.di.component.DaggerMainComponent;
 import com.laucherish.puremall.mvp.contract.MainContract;
 import com.laucherish.puremall.mvp.presenter.MainPresenter;
 
-import com.laucherish.puremall.R;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
