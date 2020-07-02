@@ -2,23 +2,19 @@ package com.laucherish.puremall.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.http.imageloader.glide.GlideImageLoaderStrategy;
 import com.jess.arms.http.log.RequestInterceptor;
 import com.jess.arms.integration.ConfigModule;
-import com.jess.arms.utils.ArmsUtils;
-import com.squareup.leakcanary.RefWatcher;
+import com.laucherish.puremall.BuildConfig;
+import com.laucherish.puremall.mvp.model.api.Api;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.laucherish.puremall.BuildConfig;
-import com.laucherish.puremall.mvp.model.api.Api;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * ================================================

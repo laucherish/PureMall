@@ -1,2 +1,2 @@
 rootProject.name='PureMall'
-include ':puremall'
+include ':puremall', ':arms', ':arms-autolayout', ':arms-imageloader-glide'

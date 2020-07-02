@@ -3,10 +3,10 @@ package com.laucherish.puremall.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.laucherish.puremall.R;
+import com.laucherish.puremall.app.base.BaseSupportActivity;
 import com.laucherish.puremall.di.component.DaggerMainComponent;
 import com.laucherish.puremall.mvp.contract.MainContract;
 import com.laucherish.puremall.mvp.presenter.MainPresenter;
@@ -29,7 +29,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
  * ================================================
  */
-public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
+public class MainActivity extends BaseSupportActivity<MainPresenter> implements MainContract.View {
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -76,5 +76,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void killMyself() {
         finish();
+    }
+
+    @Override
+    public void post(Runnable runnable) {
+
     }
 }
