@@ -3,7 +3,7 @@ ext {
     android = [
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.3",
-            minSdkVersion    : 14,
+            minSdkVersion    : 16,
             targetSdkVersion : 29,
             versionCode      : 186,
             versionName      : "2.5.2"
@@ -19,7 +19,8 @@ ext {
             rxlifecycleSdkVersion   : "1.0",
             rxlifecycle2SdkVersion  : "2.2.2",
             espressoSdkVersion      : "3.0.1",
-            canarySdkVersion        : "2.2"
+            canarySdkVersion        : "2.2",
+            fragmentationVersion    : "1.1.6"
     ]
 
     dependencies = [
@@ -102,6 +103,9 @@ ext {
             "progressmanager"          : "me.jessyan:progressmanager:1.5.0",
             "retrofit-url-manager"     : "me.jessyan:retrofit-url-manager:1.4.0",
             "lifecyclemodel"           : "me.jessyan:lifecyclemodel:1.0.1",
+            "fragmentation"            : "me.yokeyword:fragmentation:${version["fragmentationVersion"]}",
+            "fragmentation-core"       : "me.yokeyword:fragmentation-core:${version["fragmentationVersion"]}",
+            "fragmentation-swipeback"  : "me.yokeyword:fragmentation-swipeback:${version["fragmentationVersion"]}",
 
             //other
             "banner"                   : "com.youth.banner:banner:2.0.11",
