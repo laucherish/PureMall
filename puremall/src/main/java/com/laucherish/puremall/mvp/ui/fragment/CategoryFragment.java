@@ -11,9 +11,9 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.laucherish.puremall.R;
 import com.laucherish.puremall.app.base.BaseSupportFragment;
-import com.laucherish.puremall.di.component.DaggerRecommendComponent;
-import com.laucherish.puremall.mvp.contract.RecommendContract;
-import com.laucherish.puremall.mvp.presenter.RecommendPresenter;
+import com.laucherish.puremall.di.component.DaggerCategoryComponent;
+import com.laucherish.puremall.mvp.contract.CategoryContract;
+import com.laucherish.puremall.mvp.presenter.CategoryPresenter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +26,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 07/02/2020 15:31
+ * Created by MVPArmsTemplate on 07/02/2020 16:37
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -34,16 +34,16 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
  * ================================================
  */
-public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> implements RecommendContract.View {
+public class CategoryFragment extends BaseSupportFragment<CategoryPresenter> implements CategoryContract.View {
 
-    public static RecommendFragment newInstance() {
-        RecommendFragment fragment = new RecommendFragment();
+    public static CategoryFragment newInstance() {
+        CategoryFragment fragment = new CategoryFragment();
         return fragment;
     }
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
-        DaggerRecommendComponent //如找不到该类,请编译一下项目
+        DaggerCategoryComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
                 .view(this)
@@ -53,7 +53,7 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
 
     @Override
     public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recommend, container, false);
+        return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
     @Override

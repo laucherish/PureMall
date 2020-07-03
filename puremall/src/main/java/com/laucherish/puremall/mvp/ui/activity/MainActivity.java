@@ -7,12 +7,21 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.laucherish.puremall.R;
 import com.laucherish.puremall.app.base.BaseSupportActivity;
+import com.laucherish.puremall.app.base.BaseSupportFragment;
 import com.laucherish.puremall.di.component.DaggerMainComponent;
 import com.laucherish.puremall.mvp.contract.MainContract;
 import com.laucherish.puremall.mvp.presenter.MainPresenter;
+import com.laucherish.puremall.mvp.ui.fragment.CartFragment;
+import com.laucherish.puremall.mvp.ui.fragment.CategoryFragment;
+import com.laucherish.puremall.mvp.ui.fragment.MineFragment;
+import com.laucherish.puremall.mvp.ui.fragment.RecommendFragment;
+import com.laucherish.puremall.mvp.ui.widget.bottombar.BottomBar;
+import com.laucherish.puremall.mvp.ui.widget.bottombar.BottomBarTab;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -31,6 +40,16 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class MainActivity extends BaseSupportActivity<MainPresenter> implements MainContract.View {
 
+    @BindView(R.id.bottom_bar)
+    BottomBar bottomBar;
+
+    private BaseSupportFragment[] fragments = new BaseSupportFragment[4];
+    private BaseSupportFragment curFragment;
+    private BottomBarTab homeTab;
+    private BottomBarTab categoryTab;
+    private BottomBarTab cartTab;
+    private BottomBarTab selfTab;
+
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
@@ -48,7 +67,61 @@ public class MainActivity extends BaseSupportActivity<MainPresenter> implements 
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        initBottomBar();
+    }
 
+    private void initBottomBar() {
+        initFragment();
+        homeTab = new BottomBarTab(this, R.drawable.icon_navigation_home, "首页");
+        categoryTab = new BottomBarTab(this, R.drawable.icon_navigation_category, "分类");
+        cartTab = new BottomBarTab(this, R.drawable.icon_navigation_cart, "购物车");
+        selfTab = new BottomBarTab(this, R.drawable.icon_navigation_self, "个人");
+        bottomBar.addItem(homeTab)
+                .addItem(categoryTab)
+                .addItem(cartTab)
+                .addItem(selfTab);
+        bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, int prePosition) {
+                switchFragment(fragments[position]);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+
+            }
+        });
+    }
+
+    private void switchFragment(BaseSupportFragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (fragment.isAdded()) {
+            transaction.hide(curFragment)
+                    .show(fragment)
+                    .commit();
+        } else {
+            transaction.hide(curFragment)
+                    .add(R.id.fragment_contain, fragment, fragment.getClass().getName())
+                    .commit();
+        }
+        curFragment = fragment;
+    }
+
+    private void initFragment() {
+        fragments[0] = RecommendFragment.newInstance();
+        fragments[1] = CategoryFragment.newInstance();
+        fragments[2] = CartFragment.newInstance();
+        fragments[3] = MineFragment.newInstance();
+        curFragment = fragments[0];
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_contain, curFragment, curFragment.getClass().getName())
+                .commit();
     }
 
     @Override
@@ -76,10 +149,5 @@ public class MainActivity extends BaseSupportActivity<MainPresenter> implements 
     @Override
     public void killMyself() {
         finish();
-    }
-
-    @Override
-    public void post(Runnable runnable) {
-
     }
 }

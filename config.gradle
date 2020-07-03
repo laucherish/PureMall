@@ -20,7 +20,6 @@ ext {
             rxlifecycle2SdkVersion  : "2.2.2",
             espressoSdkVersion      : "3.0.1",
             canarySdkVersion        : "2.2",
-            fragmentationVersion    : "1.3.8"
     ]
 
     dependencies = [
@@ -103,9 +102,6 @@ ext {
             "progressmanager"          : "me.jessyan:progressmanager:1.5.0",
             "retrofit-url-manager"     : "me.jessyan:retrofit-url-manager:1.4.0",
             "lifecyclemodel"           : "me.jessyan:lifecyclemodel:1.0.1",
-            "fragmentation"            : "me.yokeyword:fragmentation:${version["fragmentationVersion"]}",
-            "fragmentation-core"       : "me.yokeyword:fragmentation-core:${version["fragmentationVersion"]}",
-            "fragmentation-swipeback"  : "me.yokeyword:fragmentation-swipeback:${version["fragmentationVersion"]}",
 
             //other
             "banner"                   : "com.youth.banner:banner:2.0.11",

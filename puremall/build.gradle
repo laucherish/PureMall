@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "me.jessyan.mvparms.demo"
+        applicationId "com.laucherish.puremall"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -88,8 +88,6 @@ dependencies {
 
     //other
     implementation rootProject.ext.dependencies["banner"]
-    implementation rootProject.ext.dependencies["fragmentation"]
-    implementation rootProject.ext.dependencies["fragmentation-core"]
 
     //test
     testImplementation rootProject.ext.dependencies["junit"]
