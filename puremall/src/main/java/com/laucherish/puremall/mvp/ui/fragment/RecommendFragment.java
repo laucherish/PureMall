@@ -23,6 +23,7 @@ import com.laucherish.puremall.mvp.model.entity.ProductBean;
 import com.laucherish.puremall.mvp.presenter.RecommendPresenter;
 import com.laucherish.puremall.mvp.ui.adapter.ImageBannerAdapter;
 import com.laucherish.puremall.mvp.ui.adapter.RecommendQuickAdapter;
+import com.laucherish.puremall.mvp.ui.widget.RecommendItemDecoration;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 
@@ -121,7 +122,8 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
             } else {
                 swipeRefresh.setEnabled(false);
             }
-            toolBar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.white), Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
+            toolBar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.white),
+                    Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
         });
     }
 
@@ -133,11 +135,13 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
 
     private void initRecycler() {
         Timber.e("initRecycler");
+        adapter.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_recommend_for_you, null));
         swipeRefresh.setOnRefreshListener(() -> mPresenter.getRecommend(true));
         swipeRefresh.setProgressViewOffset(true, 130, 300);
         swipeRefresh.setColorSchemeColors(getResources().getColor(R.color.red));
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(new RecommendItemDecoration(10));
+        recyclerView.addItemDecoration(new RecommendItemDecoration(ArmsUtils.dip2px(getActivity()
+                , 10)));
         recyclerView.setAdapter(adapter);
     }
 
