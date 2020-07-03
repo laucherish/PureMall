@@ -3,14 +3,17 @@ package com.laucherish.puremall.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.FragmentScope;
+import com.laucherish.puremall.mvp.contract.RecommendContract;
+import com.laucherish.puremall.mvp.model.api.service.ProductService;
+import com.laucherish.puremall.mvp.model.entity.BaseResponse;
+import com.laucherish.puremall.mvp.model.entity.IndexBean;
 
 import javax.inject.Inject;
 
-import com.laucherish.puremall.mvp.contract.RecommendContract;
+import io.reactivex.Observable;
 
 
 /**
@@ -42,5 +45,11 @@ public class RecommendModel extends BaseModel implements RecommendContract.Model
         super.onDestroy();
         this.mGson = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseResponse<IndexBean>> getRecommend() {
+        return mRepositoryManager.obtainRetrofitService(ProductService.class)
+                .getRecommend();
     }
 }

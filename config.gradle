@@ -104,7 +104,8 @@ ext {
             "lifecyclemodel"           : "me.jessyan:lifecyclemodel:1.0.1",
 
             //other
-            "banner"                   : "com.youth.banner:banner:2.0.11",
+            "banner"                   : "com.youth.banner:banner:2.0.12",
+            "brvah"                    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50",
 
             //test
             "junit"                    : "junit:junit:4.12",

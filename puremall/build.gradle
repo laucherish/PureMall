@@ -47,6 +47,7 @@ dependencies {
 
     //androidx
     implementation rootProject.ext.dependencies["cardview"]
+    implementation rootProject.ext.dependencies["design"]
 
     //tools
     //注意 Arms 核心库现在并不会依赖某个 EventBus, 要想使用 EventBus, 还请在项目中自行依赖对应的 EventBus
@@ -88,6 +89,7 @@ dependencies {
 
     //other
     implementation rootProject.ext.dependencies["banner"]
+    implementation rootProject.ext.dependencies["brvah"]
 
     //test
     testImplementation rootProject.ext.dependencies["junit"]

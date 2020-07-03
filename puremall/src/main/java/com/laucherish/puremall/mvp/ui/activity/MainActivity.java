@@ -75,7 +75,7 @@ public class MainActivity extends BaseSupportActivity<MainPresenter> implements 
         homeTab = new BottomBarTab(this, R.drawable.icon_navigation_home, "首页");
         categoryTab = new BottomBarTab(this, R.drawable.icon_navigation_category, "分类");
         cartTab = new BottomBarTab(this, R.drawable.icon_navigation_cart, "购物车");
-        selfTab = new BottomBarTab(this, R.drawable.icon_navigation_self, "个人");
+        selfTab = new BottomBarTab(this, R.drawable.icon_navigation_self, "我的");
         bottomBar.addItem(homeTab)
                 .addItem(categoryTab)
                 .addItem(cartTab)

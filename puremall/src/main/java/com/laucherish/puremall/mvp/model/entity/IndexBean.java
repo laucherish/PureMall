@@ -9,37 +9,15 @@ import java.util.List;
  */
 public class IndexBean {
 
-    public List<NewGoodsListBean> newGoodsList;
+    public List<ProductBean> newGoodsList;
     public List<CouponListBean> couponList;
     public List<ChannelBean> channel;
     public List<GrouponListBean> grouponList;
     public List<BannerBean> banner;
     public List<BrandListBean> brandList;
-    public List<HotGoodsListBean> hotGoodsList;
+    public List<ProductBean> hotGoodsList;
     public List<TopicListBean> topicList;
     public List<FloorGoodsListBean> floorGoodsList;
-
-    public static class NewGoodsListBean {
-        /**
-         * id : 1116011
-         * name : 蔓越莓曲奇 200克
-         * brief : 酥脆奶香，甜酸回味
-         * picUrl : http://yanxuan.nosdn.127.net/767b370d07f3973500db54900bcbd2a7.png
-         * isNew : true
-         * isHot : true
-         * counterPrice : 56
-         * retailPrice : 36
-         */
-
-        public int id;
-        public String name;
-        public String brief;
-        public String picUrl;
-        public boolean isNew;
-        public boolean isHot;
-        public int counterPrice;
-        public int retailPrice;
-    }
 
     public static class CouponListBean {
         /**
@@ -143,28 +121,6 @@ public class IndexBean {
         public double floorPrice;
     }
 
-    public static class HotGoodsListBean {
-        /**
-         * id : 1006013
-         * name : 双宫茧桑蚕丝被 空调被
-         * brief : 一级桑蚕丝，吸湿透气柔软
-         * picUrl : http://yanxuan.nosdn.127.net/583812520c68ca7995b6fac4c67ae2c7.png
-         * isNew : false
-         * isHot : true
-         * counterPrice : 719
-         * retailPrice : 699
-         */
-
-        public int id;
-        public String name;
-        public String brief;
-        public String picUrl;
-        public boolean isNew;
-        public boolean isHot;
-        public int counterPrice;
-        public int retailPrice;
-    }
-
     public static class TopicListBean {
         /**
          * id : 264
@@ -193,28 +149,6 @@ public class IndexBean {
 
         public String name;
         public int id;
-        public List<GoodsListBean> goodsList;
-
-        public static class GoodsListBean {
-            /**
-             * id : 1006002
-             * name : 轻奢纯棉刺绣水洗四件套
-             * brief : 设计师原款，精致绣花
-             * picUrl : http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png
-             * isNew : false
-             * isHot : false
-             * counterPrice : 919
-             * retailPrice : 899
-             */
-
-            public int id;
-            public String name;
-            public String brief;
-            public String picUrl;
-            public boolean isNew;
-            public boolean isHot;
-            public int counterPrice;
-            public int retailPrice;
-        }
+        public List<ProductBean> goodsList;
     }
 }
