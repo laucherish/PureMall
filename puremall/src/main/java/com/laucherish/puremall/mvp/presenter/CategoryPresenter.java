@@ -6,11 +6,15 @@ import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
+import com.laucherish.puremall.app.utils.RxUtils;
 import com.laucherish.puremall.mvp.contract.CategoryContract;
+import com.laucherish.puremall.mvp.model.entity.BaseResponse;
+import com.laucherish.puremall.mvp.model.entity.CategoryListBean;
 
 import javax.inject.Inject;
 
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 
 /**
@@ -26,7 +30,8 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
  * ================================================
  */
 @FragmentScope
-public class CategoryPresenter extends BasePresenter<CategoryContract.Model, CategoryContract.View> {
+public class CategoryPresenter extends BasePresenter<CategoryContract.Model,
+        CategoryContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -39,6 +44,36 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.Model, Cat
     @Inject
     public CategoryPresenter(CategoryContract.Model model, CategoryContract.View rootView) {
         super(model, rootView);
+    }
+
+    public void getCategoryList() {
+        mModel.getCategoryList()
+                .compose(RxUtils.applySchedulers(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseResponse<CategoryListBean>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseResponse<CategoryListBean> response) {
+                        if (response.isSuccess()) {
+                            mRootView.refreshData(response.getData());
+                        } else {
+                            mRootView.showMessage(response.getErrmsg());
+                        }
+                    }
+                });
+    }
+
+    public void getCategory(int id) {
+        mModel.getCategory(id)
+                .compose(RxUtils.applySchedulers(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseResponse<CategoryListBean>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseResponse<CategoryListBean> response) {
+                        if (response.isSuccess()) {
+                            mRootView.refreshCategory(response.getData());
+                        } else {
+                            mRootView.showMessage(response.getErrmsg());
+                        }
+                    }
+                });
     }
 
     @Override

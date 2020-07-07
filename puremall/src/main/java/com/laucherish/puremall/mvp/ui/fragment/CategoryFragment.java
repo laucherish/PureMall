@@ -13,11 +13,23 @@ import com.laucherish.puremall.R;
 import com.laucherish.puremall.app.base.BaseSupportFragment;
 import com.laucherish.puremall.di.component.DaggerCategoryComponent;
 import com.laucherish.puremall.mvp.contract.CategoryContract;
+import com.laucherish.puremall.mvp.model.entity.CategoryBean;
+import com.laucherish.puremall.mvp.model.entity.CategoryListBean;
 import com.laucherish.puremall.mvp.presenter.CategoryPresenter;
+import com.laucherish.puremall.mvp.ui.adapter.CategoryLeftAdapter;
+import com.laucherish.puremall.mvp.ui.adapter.CategoryRightAdapter;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -36,6 +48,17 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class CategoryFragment extends BaseSupportFragment<CategoryPresenter> implements CategoryContract.View {
 
+    @BindView(R.id.recycler_left)
+    RecyclerView recyclerLeft;
+    @BindView(R.id.recycler_right)
+    RecyclerView recyclerRight;
+    @Inject
+    List<CategoryBean> categories;
+    @Inject
+    CategoryLeftAdapter leftAdapter;
+    @Inject
+    CategoryRightAdapter rightAdapter;
+
     public static CategoryFragment newInstance() {
         CategoryFragment fragment = new CategoryFragment();
         return fragment;
@@ -52,13 +75,41 @@ public class CategoryFragment extends BaseSupportFragment<CategoryPresenter> imp
     }
 
     @Override
-    public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                         @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        initLeftRecycler();
+        initRightRecycler();
+        if (mPresenter != null) {
+            mPresenter.getCategoryList();
+        }
+    }
 
+    private void initLeftRecycler() {
+        recyclerLeft.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerLeft.setAdapter(leftAdapter);
+        leftAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.view_empty, null));
+
+        leftAdapter.setOnItemClickListener((adapter, view, position) -> {
+            leftAdapter.setSelectedPosition(position);
+            if (mPresenter != null) {
+                mPresenter.getCategory(leftAdapter.getData().get(position).id);
+            }
+        });
+    }
+
+    private void initRightRecycler() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        recyclerRight.setLayoutManager(gridLayoutManager);
+        recyclerRight.setAdapter(rightAdapter);
+        rightAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.view_empty, null));
+
+        rightAdapter.setOnItemClickListener((adapter, view, position) -> {
+        });
     }
 
     /**
@@ -66,9 +117,12 @@ public class CategoryFragment extends BaseSupportFragment<CategoryPresenter> imp
      * 建议在有多个需要与外界交互的方法时, 统一传 {@link Message}, 通过 what 字段来区分不同的方法, 在 {@link #setData(Object)}
      * 方法中就可以 {@code switch} 做不同的操作, 这样就可以用统一的入口方法做多个不同的操作, 可以起到分发的作用
      * <p>
-     * 调用此方法时请注意调用时 Fragment 的生命周期, 如果调用 {@link #setData(Object)} 方法时 {@link Fragment#onCreate(Bundle)} 还没执行
-     * 但在 {@link #setData(Object)} 里却调用了 Presenter 的方法, 是会报空的, 因为 Dagger 注入是在 {@link Fragment#onCreate(Bundle)} 方法中执行的
-     * 然后才创建的 Presenter, 如果要做一些初始化操作,可以不必让外部调用 {@link #setData(Object)}, 在 {@link #initData(Bundle)} 中初始化就可以了
+     * 调用此方法时请注意调用时 Fragment 的生命周期, 如果调用 {@link #setData(Object)} 方法时
+     * {@link Fragment#onCreate(Bundle)} 还没执行
+     * 但在 {@link #setData(Object)} 里却调用了 Presenter 的方法, 是会报空的, 因为 Dagger 注入是在
+     * {@link Fragment#onCreate(Bundle)} 方法中执行的
+     * 然后才创建的 Presenter, 如果要做一些初始化操作,可以不必让外部调用 {@link #setData(Object)}, 在
+     * {@link #initData(Bundle)} 中初始化就可以了
      * <p>
      * Example usage:
      * <pre>
@@ -127,5 +181,18 @@ public class CategoryFragment extends BaseSupportFragment<CategoryPresenter> imp
     @Override
     public void killMyself() {
 
+    }
+
+    @Override
+    public void refreshData(CategoryListBean categoryList) {
+        categories.clear();
+        categories.addAll(categoryList.categoryList);
+        leftAdapter.notifyDataSetChanged();
+        rightAdapter.setNewData(categoryList.currentSubCategory);
+    }
+
+    @Override
+    public void refreshCategory(CategoryListBean categoryList) {
+        rightAdapter.setNewData(categoryList.currentSubCategory);
     }
 }

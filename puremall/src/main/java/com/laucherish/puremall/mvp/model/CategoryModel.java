@@ -3,14 +3,17 @@ package com.laucherish.puremall.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.FragmentScope;
+import com.laucherish.puremall.mvp.contract.CategoryContract;
+import com.laucherish.puremall.mvp.model.api.service.CategoryService;
+import com.laucherish.puremall.mvp.model.entity.BaseResponse;
+import com.laucherish.puremall.mvp.model.entity.CategoryListBean;
 
 import javax.inject.Inject;
 
-import com.laucherish.puremall.mvp.contract.CategoryContract;
+import io.reactivex.Observable;
 
 
 /**
@@ -42,5 +45,17 @@ public class CategoryModel extends BaseModel implements CategoryContract.Model {
         super.onDestroy();
         this.mGson = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseResponse<CategoryListBean>> getCategoryList() {
+        return mRepositoryManager.obtainRetrofitService(CategoryService.class)
+                .getCategoryList();
+    }
+
+    @Override
+    public Observable<BaseResponse<CategoryListBean>> getCategory(int id) {
+        return mRepositoryManager.obtainRetrofitService(CategoryService.class)
+                .getCategory(id);
     }
 }
