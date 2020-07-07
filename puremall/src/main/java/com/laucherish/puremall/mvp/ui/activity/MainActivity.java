@@ -3,6 +3,7 @@ package com.laucherish.puremall.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.jaeger.library.StatusBarUtil;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.laucherish.puremall.R;
@@ -67,6 +68,7 @@ public class MainActivity extends BaseSupportActivity<MainPresenter> implements 
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        setStatusBar();
         initBottomBar();
     }
 
@@ -144,6 +146,10 @@ public class MainActivity extends BaseSupportActivity<MainPresenter> implements 
     public void launchActivity(@NonNull Intent intent) {
         checkNotNull(intent);
         ArmsUtils.startActivity(intent);
+    }
+
+    protected void setStatusBar() {
+        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
     }
 
     @Override

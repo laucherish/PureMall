@@ -90,6 +90,7 @@ dependencies {
     //other
     implementation rootProject.ext.dependencies["banner"]
     implementation rootProject.ext.dependencies["brvah"]
+    implementation rootProject.ext.dependencies["statusbarutil"]
 
     //test
     testImplementation rootProject.ext.dependencies["junit"]

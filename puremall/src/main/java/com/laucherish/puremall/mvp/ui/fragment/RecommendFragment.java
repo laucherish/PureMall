@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.jaeger.library.StatusBarUtil;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.laucherish.puremall.R;
@@ -107,12 +108,17 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        setStatusBar();
         initAppBar();
         initBanner();
         initRecycler();
         if (mPresenter != null) {
             mPresenter.getRecommend(false);
         }
+    }
+
+    private void setStatusBar() {
+        StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), viewStatusBar);
     }
 
     private void initAppBar() {
