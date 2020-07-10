@@ -39,7 +39,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
-import timber.log.Timber;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -140,7 +139,6 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
     }
 
     private void initRecycler() {
-        Timber.e("initRecycler");
         adapter.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_recommend_for_you, null));
         swipeRefresh.setOnRefreshListener(() -> mPresenter.getRecommend(true));
         swipeRefresh.setProgressViewOffset(true, 130, 300);
