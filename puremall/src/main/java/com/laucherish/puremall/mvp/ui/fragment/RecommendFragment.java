@@ -149,7 +149,7 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
         recyclerView.setAdapter(adapter);
     }
 
-    public int changeAlpha(int color, float fraction) {
+    private int changeAlpha(int color, float fraction) {
         int red = Color.red(color);
         int green = Color.green(color);
         int blue = Color.blue(color);
