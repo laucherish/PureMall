@@ -25,6 +25,6 @@ public class ProductBean implements Serializable {
     public String picUrl;
     public boolean isNew;
     public boolean isHot;
-    public int counterPrice;
-    public int retailPrice;
+    public double counterPrice;
+    public double retailPrice;
 }
