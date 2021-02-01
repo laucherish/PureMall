@@ -502,7 +502,7 @@ public class ProductDetailBean implements Serializable {
          * id : 1
          * goodsId : 1181000
          * specifications : ["1.5m床垫*1+枕头*2","浅杏粉"]
-         * price : 999
+         * price : 999.00
          * number : 100
          * url : http://yanxuan.nosdn.127.net/1f67b1970ee20fd572b7202da0ff705d.png
          * addTime : 2018-02-01 08:00:00
@@ -518,7 +518,7 @@ public class ProductDetailBean implements Serializable {
         /**
          * price
          */
-        public int price;
+        public double price;
         /**
          * number
          */

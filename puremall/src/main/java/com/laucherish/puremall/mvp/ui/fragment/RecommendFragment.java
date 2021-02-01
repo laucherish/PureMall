@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.jaeger.library.StatusBarUtil;
 import com.jess.arms.di.component.AppComponent;
@@ -22,6 +23,7 @@ import com.laucherish.puremall.mvp.contract.RecommendContract;
 import com.laucherish.puremall.mvp.model.entity.IndexBean;
 import com.laucherish.puremall.mvp.model.entity.ProductBean;
 import com.laucherish.puremall.mvp.presenter.RecommendPresenter;
+import com.laucherish.puremall.mvp.ui.activity.product.ProductDetailActivity;
 import com.laucherish.puremall.mvp.ui.adapter.ImageBannerAdapter;
 import com.laucherish.puremall.mvp.ui.adapter.RecommendQuickAdapter;
 import com.laucherish.puremall.mvp.ui.widget.RecommendItemDecoration;
@@ -73,6 +75,7 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
     RecyclerView recyclerView;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
+
     @Inject
     ImageBannerAdapter bannerAdapter;
     @Inject
@@ -147,6 +150,10 @@ public class RecommendFragment extends BaseSupportFragment<RecommendPresenter> i
         recyclerView.addItemDecoration(new RecommendItemDecoration(ArmsUtils.dip2px(getActivity()
                 , 10)));
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            String productId = String.valueOf(((ProductBean) adapter.getData().get(position)).id);
+            ProductDetailActivity.startActivity(getContext(), productId);
+        });
     }
 
     private int changeAlpha(int color, float fraction) {

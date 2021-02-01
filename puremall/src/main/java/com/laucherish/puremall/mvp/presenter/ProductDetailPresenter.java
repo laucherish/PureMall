@@ -11,6 +11,8 @@ import com.laucherish.puremall.mvp.contract.ProductDetailContract;
 import com.laucherish.puremall.mvp.model.entity.BaseResponse;
 import com.laucherish.puremall.mvp.model.entity.ProductDetailBean;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 import androidx.core.app.ComponentActivity;
@@ -61,7 +63,7 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailContract.
                 .compose(RxUtils.applySchedulers(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseResponse<ProductDetailBean>>(mErrorHandler) {
                     @Override
-                    public void onNext(BaseResponse<ProductDetailBean> response) {
+                    public void onNext(@NotNull BaseResponse<ProductDetailBean> response) {
                         if (response.isSuccess()) {
                             mRootView.refreshData(response.getData());
                         } else {
