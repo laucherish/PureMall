@@ -68,7 +68,7 @@ public class MainActivity extends BaseSupportActivity<MainPresenter> implements 
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        setStatusBar();
+//        setStatusBar();
         initBottomBar();
     }
 

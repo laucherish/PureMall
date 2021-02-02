@@ -3,7 +3,7 @@ ext {
     android = [
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.3",
-            minSdkVersion    : 17,
+            minSdkVersion    : 21,
             targetSdkVersion : 29,
             versionCode      : 186,
             versionName      : "2.5.2"
@@ -38,6 +38,7 @@ ext {
             "cardview"                 : "androidx.cardview:cardview:1.0.0",
             "annotations"              : "androidx.annotation:annotation:${version["androidXSdkVersion"]}",
             "recyclerview"             : "androidx.recyclerview:recyclerview:${version["androidXSdkVersion"]}",
+            "constraintlayout"         : "androidx.constraintlayout:constraintlayout:${version["androidXSdkVersion"]}",
 
             //network
             "retrofit"                 : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
@@ -63,6 +64,7 @@ ext {
             "paginate"                 : "com.github.markomilos:paginate:0.5.1",
             "vlayout"                  : "com.alibaba.android:vlayout:1.1.0@aar",
             "autosize"                 : "me.jessyan:autosize:1.2.1",
+            "titlebar"                 : "com.hjq:titlebar:6.5",
 
             //rx1
             "rxandroid"                : "io.reactivex:rxandroid:1.2.1",

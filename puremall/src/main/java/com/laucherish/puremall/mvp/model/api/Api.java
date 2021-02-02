@@ -10,7 +10,9 @@ package com.laucherish.puremall.mvp.model.api;
  * ================================================
  */
 public interface Api {
-    String APP_DOMAIN = "http://www.laucherish.com:8080";
+//    String APP_DOMAIN = "http://www.laucherish.com:8080";
+
+    String APP_DOMAIN = "http://127.0.0.1:8080";
 
     int REQUEST_SUCCESS = 0;
 }
